@@ -38,5 +38,5 @@ app.use(bodyParser())
 
 require('./config/routes')(app)
 
-app.listen(4030)
-logger.info('servser started at 4030')
+app.listen(process.env.PORT || 3000)
+logger.info(`servser started at ${process.env.PORT || 3000}`)
