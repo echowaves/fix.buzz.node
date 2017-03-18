@@ -7,6 +7,7 @@ import json from 'koa-json'
 import devLogger from 'koa-logger'
 import logger from './lib/logger'
 
+
 const app = module.exports = new Koa()
 
 // Global Error Handler
@@ -38,5 +39,6 @@ app.use(bodyParser())
 
 require('./config/routes')(app)
 
-app.listen(process.env.PORT || 3000)
-logger.info(`servser started at ${process.env.PORT || 3000}`)
+const port = process.env.PORT || 3000
+app.listen(port)
+logger.info(`servser started at ${port}`)

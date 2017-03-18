@@ -1,3 +1,3 @@
 exports.helloWorld = async ctx => {
-  ctx.body = 'Hello from Koa!'
+  ctx.body = ['babel-preset-stage-3', 'bottle']
 }
