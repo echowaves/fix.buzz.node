@@ -14,13 +14,11 @@ var User = config.DB.define('user', {
 
 // Adding a class level method
 User.findByEmail = async email => {
-  let user
-  user = await User.findOne({
+  return await User.findOne({
     where: {
       email: email
     }
   })
-  return user
 }
 
 
