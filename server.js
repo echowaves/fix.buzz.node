@@ -7,6 +7,8 @@ import json from 'koa-json'
 import devLogger from 'koa-logger'
 import logger from './lib/logger'
 
+import dotenv from 'dotenv'
+dotenv.config()
 
 const app = module.exports = new Koa()
 
