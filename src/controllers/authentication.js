@@ -21,5 +21,5 @@ exports.signup = async ctx => {
   logger.debug("new user created: ", newUser.email)
 
   // Resond to request indicating the user was created
-  ctx.body = ctx.request.body
+  ctx.body = { success: true }
 }
