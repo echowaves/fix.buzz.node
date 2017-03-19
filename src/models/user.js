@@ -22,4 +22,5 @@ User.findByEmail = async email => {
 }
 
 
+
 export default User

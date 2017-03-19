@@ -6,12 +6,7 @@ exports.signup = async ctx => {
   const password = ctx.request.body.password
 
   // See if a user with a given email exists
-  let user
-  try {
-    user = await User.findByEmail(email)
-  } catch (err) {
-    logger.error("error validating email exists", err)
-  }
+  let user = await User.findByEmail(email)
 
   // If a user does exists, return an Error
   if(user) {
@@ -22,6 +17,8 @@ exports.signup = async ctx => {
   }
 
   // If a user with email does NOT exits, create and safe record
+  let newUser = await User.create({email, password})
+  logger.debug("new user created: ", newUser.email)
 
   // Resond to request indicating the user was created
   ctx.body = ctx.request.body
