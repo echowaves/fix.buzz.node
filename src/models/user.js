@@ -1,5 +1,6 @@
 import Sequelize from 'sequelize'
 import config from '../../config/consts'
+import logger from '../../lib/logger'
 
 var User = config.DB.define('user', {
   email: {
@@ -10,15 +11,27 @@ var User = config.DB.define('user', {
   }
 })
 
-export default User
+
+// Adding a class level method
+User.findByEmail = async email => {
+  let foundUser
+  try {
+    foundUser= await User.findAll({
+      where: {
+        email: email
+      }
+    })
+  } catch (err) {
+    logger.error("error looking for email", err)
+  }
+  return foundUser
+}
 
 
-
-// export async function findOne(params) {
-//   try {
-//     let foundUser = await db.users.findOne(params)
 //
-//   } catch (err) {
-//
-//   }
+// // Adding an instance level method
+// User.prototype.instanceLevelMethod = function() {
+//   return 'bar';
 // }
+
+export default User
