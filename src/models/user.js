@@ -14,24 +14,14 @@ var User = config.DB.define('user', {
 
 // Adding a class level method
 User.findByEmail = async email => {
-  let foundUser
-  try {
-    foundUser= await User.findAll({
-      where: {
-        email: email
-      }
-    })
-  } catch (err) {
-    logger.error("error looking for email", err)
-  }
-  return foundUser
+  let user
+  user = await User.findOne({
+    where: {
+      email: email
+    }
+  })
+  return user
 }
 
-
-//
-// // Adding an instance level method
-// User.prototype.instanceLevelMethod = function() {
-//   return 'bar';
-// }
 
 export default User

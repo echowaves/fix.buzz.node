@@ -1,15 +1,20 @@
 import User from '../models/user'
+import logger from '../../lib/logger'
 
 exports.signup = async ctx => {
   const email = ctx.request.body.email
   const password = ctx.request.body.password
-  console.log("email1: ", email)
+  logger.debug("email1: ", email)
 
   // See if a user with a given email exists
-  let user = await User.findOne({ where: {email: email} })
+  let user
+  try {
+    user = await User.findByEmail(email)
+  } catch (err) {
+    logger.error("error validating email exists", err)
+  }
 
-  console.log("email2: ", user.email)
-
+  logger.debug("email2: ", user.email)
 
 
   // If a user does exists, return an Error
