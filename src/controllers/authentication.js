@@ -5,6 +5,12 @@ exports.signup = async ctx => {
   const email = ctx.request.body.email
   const password = ctx.request.body.password
 
+  if(!email || !password) {
+    ctx.response.status = 422
+    ctx.body = { error: 'You must provide email and password'}
+    return
+  }
+
   // See if a user with a given email exists
   let user  = await User.findByEmail(email)
 
@@ -19,9 +25,7 @@ exports.signup = async ctx => {
   // If a user with email does NOT exits, create and safe record
   let newUser
   try {
-
     newUser = await User.create({email, password})
-
   } catch(err) {
     logger.error("unable to create new user", err)
     ctx.response.status = 417
