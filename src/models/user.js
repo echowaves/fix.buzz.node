@@ -1,9 +1,7 @@
 import Sequelize from 'sequelize'
 import config from '../../config/consts'
 
-
-
-export var User = config.DB.define('user', {
+var User = config.DB.define('user', {
   email: {
     type: Sequelize.STRING
   },
@@ -12,7 +10,7 @@ export var User = config.DB.define('user', {
   }
 })
 
-
+export default User
 
 
 

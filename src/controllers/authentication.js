@@ -1,4 +1,4 @@
-import {User} from '../models/user'
+import User from '../models/user'
 
 exports.signup = async ctx => {
   const email = ctx.request.body.email
