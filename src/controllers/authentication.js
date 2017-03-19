@@ -1,4 +1,4 @@
-import User from '../models/user'
+import {User} from '../models/user'
 
 exports.signup = async ctx => {
   const email = ctx.request.body.email
@@ -6,10 +6,9 @@ exports.signup = async ctx => {
   console.log("email1: ", email)
 
   // See if a user with a given email exists
-  // let user = await
-  User.findOne({ where: {email: email} })
+  let user = await User.findOne({ where: {email: email} })
 
-  // console.log("email2: ", user.email)
+  console.log("email2: ", user.email)
 
 
 
