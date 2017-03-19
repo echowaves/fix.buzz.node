@@ -13,7 +13,7 @@
     "parser": "babel-eslint"
   },
   "scripts": {
-    "start": "babel-node server.js", 
+    "start": "babel-node server.js",
     "dev": "./node_modules/.bin/nodemon server.js --exec babel-node",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register ./test/*.js",
     "migrate": "./node_modules/.bin/pg-migrate $@ --database-url-var DATABASE_URL",
@@ -41,7 +41,8 @@
     "koa-json": "^2.0.2",
     "koa-logger": "^2.0.1",
     "koa-router": "^7.1.0",
-    "massive": "^2.6.0",
+    "sequelize": "^3.30.2",
+    "pg": "^6.1.4",
     "node-pg-migrate": "^1.2.1",
     "winston": "^2.3.1"
   },
