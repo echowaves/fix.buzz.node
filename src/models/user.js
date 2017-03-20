@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize'
 import config from '../../config/consts'
 import logger from '../../lib/logger'
+import bcrypt from 'bcrypt-as-promised'
 
 var User = config.DB.define('user', {
   email: {
@@ -8,6 +9,14 @@ var User = config.DB.define('user', {
   },
   password: {
     type: Sequelize.STRING
+  }
+}, {
+  hooks: {
+    afterValidate: async(user, options) => {
+      logger.debug("after validate hashing user.password")
+      let hashed_password  = await bcrypt.hash(user.password, 10)
+      user.password = hashed_password
+    }
   }
 })
 
