@@ -1,5 +1,11 @@
 import User from '../models/user'
 import logger from '../../lib/logger'
+import jwt from 'jwt-simple'
+
+var tokenForUser = user => {
+  const timestamp = new Date().getTime()
+  return jwt.encode({sub: user.email, iat: timestamp}, process.env.FBUZZ_JWT_SECRET)
+}
 
 exports.signup = async ctx => {
   const email = ctx.request.body.email
@@ -36,5 +42,5 @@ exports.signup = async ctx => {
   logger.debug("new user created: ", newUser.email)
 
   // Resond to request indicating the user was created
-  ctx.body = { success: true }
+  ctx.body = { token: tokenForUser(newUser) }
 }
