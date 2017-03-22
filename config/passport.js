@@ -13,6 +13,18 @@ const jwtLogin = new JwtStrategy(jwtOptions, (payload, done) => {
   // If it does, call 'done' with that user
   //Otherwise, call dobe without a user object
 
+  try {
+    let user = await User.findByEmail(payload.sub)
+    if (user) {
+      done(null, user)
+    } else {
+      done(null, false)
+    }
+  } catch (err) {
+    return done(err, false)
+  }
+
+
 })
 
 // Tell passport to use this Strategy
