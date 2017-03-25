@@ -5,20 +5,18 @@ import AuthenticationController from '../src/controllers/authentication'
 
 require('./passportStrategies')
 
-const passport = require('koa-passport')
+// const passport = require('koa-passport')
+const passport = require('./passportStrategies')
 
 const requireAuth = passport.authenticate('jwt', {session: false})
 
 module.exports = function (app) {
   const router = new Router()
-
   app.use(passport.initialize())
 
   router
     .get('/', requireAuth, indexController.helloWorld)
-
     .post('/signup', AuthenticationController.signup)
-
 
   app.use(router.routes())
 }

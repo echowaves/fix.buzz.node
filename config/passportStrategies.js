@@ -1,28 +1,23 @@
 const passport = require('koa-passport')
-
+import logger from '../lib/logger'
 import User from '../src/models/user'
 
-import {Strategy, ExtractJwt} from 'passport-jwt'
-import logger from '../lib/logger'
+var JwtStrategy = require('passport-jwt').Strategy,
+ExtractJwt = require('passport-jwt').ExtractJwt;
 
-// Setup options for JWT Strategy
+// import logger from '../lib/logger'
+
 
 const jwtOptions = {
-  jwtFromRequest: ExtractJwt.fromHeader('authorization'),
+  jwtFromRequest: ExtractJwt.fromAuthHeader(),
   secretOrKey: process.env.FBUZZ_JWT_SECRET
+
 }
 
 // Create JWT Strategy
-const jwtLogin = new Strategy(jwtOptions, function(payload, done) {
-  logger.debug("payload: ", payload)
-  done(null, false)
-})
-
-
-
-  // async (payload, done) => {
-  // logger.debug("payload: ", payload)
-  // return done(null, false)
+const jwtLogin = new JwtStrategy(jwtOptions, async(payload, done) => {
+logger.debug("payload: ", payload)
+// return done(null, false)
 // })
 //   logger.debug("payload: ", payload)
 //   // See if the user email in the payload exists in our database
@@ -42,8 +37,9 @@ const jwtLogin = new Strategy(jwtOptions, function(payload, done) {
 //     logger.error("failed JWT Strategy: ", err)
 //     return done(err)
 //   }
-// })
+})
 
 // Tell passport to use this Strategy
 passport.use('jwt', jwtLogin)
 // export default jwtLogin
+module.exports = passport
