@@ -9,6 +9,7 @@ require('./passportStrategies')
 const passport = require('./passportStrategies')
 
 const requireAuth = passport.authenticate('jwt', {session: false})
+const requireSignin = passport.authenticate('local', {session: false})
 
 module.exports = function (app) {
   const router = new Router()
@@ -16,6 +17,7 @@ module.exports = function (app) {
 
   router
     .get('/', requireAuth, indexController.helloWorld)
+    .post('/signin', requireSignin, AuthenticationController.signin)
     .post('/signup', AuthenticationController.signup)
 
   app.use(router.routes())

@@ -6,6 +6,12 @@ var tokenForUser = user => {
   const timestamp = new Date().getTime()
   return jwt.encode({sub: user.email, iat: timestamp}, process.env.FBUZZ_JWT_SECRET)
 }
+exports.signin = async ctx => {
+  // User has already had their email and password auth'd
+  // We just need to give them a token
+  ctx.body = {token: tokenForUser(ctx.req.user)}
+}
+
 
 exports.signup = async ctx => {
   const email = ctx.request.body.email

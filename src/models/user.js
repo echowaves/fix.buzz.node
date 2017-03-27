@@ -31,8 +31,15 @@ User.findByEmail = async email => {
 }
 
 // Adding an instance level method
-User.Instance.prototype.comparePassword = async(candidatePassword) => {
-  return true
+User.Instance.prototype.comparePassword = async function(candidatePassword) {
+  try {
+    let isMatch = await bcrypt.compare(candidatePassword, this.password)
+    logger.debug("there is a match: ", isMatch)
+    return isMatch
+  } catch(err) {
+    logger.debug("failed to match the passwords: ", err)
+  }
+  return false
 }
 
 export default User

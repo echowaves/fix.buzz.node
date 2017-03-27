@@ -26,7 +26,10 @@ const localLogin = new LocalStrategy(localOptions, async(email, password, done) 
   }
 
   //compare passwords - is 'password' equal user.password?
+  let isMatch = await user.comparePassword(password)
+  if(!isMatch) { return done(null, false) }
 
+  return done(null, user)
 })
 
 
@@ -59,5 +62,6 @@ const jwtLogin = new JwtStrategy(jwtOptions, async(payload, done) => {
 
 // Tell passport to use this Strategy
 passport.use('jwt', jwtLogin)
+passport.use(localLogin)
 // export default jwtLogin
 module.exports = passport
