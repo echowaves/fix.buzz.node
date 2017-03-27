@@ -10,9 +10,22 @@ var LocalStrategy = require('passport-local')
 // Create local Strategy
 const localOptions = { usernameField: 'email'}
 const localLogin = new LocalStrategy(localOptions, async(email, password, done) => {
-  // Verify this username and password, call done with the username
-  // if it is a correct username and password
+  // Verify this email and password, call done with the username
+  // if it is a correct email and password
   // otherwise, call done with false
+  let user
+  try {
+    user = await User.findByEmail(email)
+  } catch(err) {
+    logger.error("failed Local Strategy: ", err)
+    return done(err)
+  }
+  if(!user) {
+    logger.error("failed Local Strategy, user not found")
+    return done(null, false)
+  }
+
+  //compare passwords - is 'password' equal user.password?
 
 })
 
