@@ -1,9 +1,9 @@
 import Sequelize from 'sequelize'
-import config from '../../config/consts'
+import {sequelize} from '../../config/consts'
 import logger from '../../lib/logger'
 import bcrypt from 'bcrypt-as-promised'
 
-var User = config.DB.define('user', {
+var User = sequelize.define('user', {
   email: {
     type: Sequelize.STRING
   },
@@ -18,7 +18,7 @@ var User = config.DB.define('user', {
       user.password = hashed_password
     }
   }
-})
+});
 
 
 // Adding a class level method
@@ -30,6 +30,9 @@ User.findByEmail = async email => {
   })
 }
 
-
+// Adding an instance level method
+User.Instance.prototype.comparePassword = async(candidatePassword) => {
+  return true
+}
 
 export default User
