@@ -5,13 +5,22 @@ import User from '../src/models/user'
 var JwtStrategy = require('passport-jwt').Strategy,
 ExtractJwt = require('passport-jwt').ExtractJwt;
 
-// import logger from '../lib/logger'
+var LocalStrategy = require('passport-local')
+
+// Create local Strategy
+const localOptions = { usernameField: 'email'}
+const localLogin = new LocalStrategy(localOptions, async(email, password, done) => {
+  // Verify this username and password, call done with the username
+  // if it is a correct username and password
+  // otherwise, call done with false
+
+})
 
 
+// Set up options for JWT Strategy
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeader(),
   secretOrKey: process.env.FBUZZ_JWT_SECRET
-
 }
 
 // Create JWT Strategy
