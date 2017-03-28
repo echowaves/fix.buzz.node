@@ -61,7 +61,7 @@ const jwtLogin = new JwtStrategy(jwtOptions, async(payload, done) => {
 })
 
 // Tell passport to use this Strategy
-passport.use('jwt', jwtLogin)
+passport.use(jwtLogin)
 passport.use(localLogin)
 // export default jwtLogin
 module.exports = passport
