@@ -1,5 +1,5 @@
 import User from '../models/user'
-import logger from '../../lib/logger'
+import logger from '../../../lib/logger'
 import jwt from 'jwt-simple'
 
 var tokenForUser = user => {
