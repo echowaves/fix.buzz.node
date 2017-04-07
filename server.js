@@ -1,4 +1,8 @@
 import Koa from 'koa'
+
+import middleware from 'koa-webpack'
+import config from './webpack.config.js'
+
 import bodyParser from 'koa-bodyparser'
 import compress from 'koa-compress'
 import convert from 'koa-convert'
@@ -21,6 +25,10 @@ app.use(async (ctx, next) => {
     ctx.status = e.status || 500
   }
 })
+
+app.use(middleware({
+  config: config
+}))
 
 // Compress response size and Gzip
 app.use(compress({
