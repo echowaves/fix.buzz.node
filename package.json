@@ -13,8 +13,8 @@
     "parser": "babel-eslint"
   },
   "scripts": {
-    "start": "babel-node server.js",
-    "dev": "./node_modules/.bin/nodemon server.js --exec babel-node",
+    "start": "node babel.hook.js",
+    "build": "webpack",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register ./test/*.js",
     "migrate": "./node_modules/.bin/pg-migrate $@ --database-url-var DATABASE_URL",
     "migrate-test": "./node_modules/.bin/pg-migrate $@ --database-url-var DATABASE_URL_TEST"
@@ -31,7 +31,8 @@
   "homepage": "https://github.com/echowaves/fix.buzz.node/wiki",
   "dependencies": {
     "axios": "^0.15.3",
-    "babel-preset-stage-1": "^6.22.0",
+    "babel-polyfill": "^6.23.0",
+    "babel-register": "^6.24.1",
     "bcrypt-as-promised": "^1.1.0",
     "dotenv": "^4.0.0",
     "jwt-simple": "^0.5.1",
@@ -44,6 +45,7 @@
     "koa-logger": "^2.0.1",
     "koa-passport": "^3.0.0",
     "koa-router": "^7.1.0",
+    "koa-static": "^3.0.0",
     "lodash": "^4.17.4",
     "node-pg-migrate": "^1.2.1",
     "passport-jwt": "^2.2.1",
@@ -61,10 +63,10 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.0",
-    "babel-preset-es2015": "^6.24.0",
-    "babel-preset-react": "^6.23.0",
-    "babel-preset-stage-3": "^6.22.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-3": "^6.24.1",
     "chai": "^3.5.0",
     "chai-jquery": "^2.0.0",
     "jquery": "^3.2.1",
@@ -74,6 +76,7 @@
     "nodemon": "^1.11.0",
     "react-addons-test-utils": "^15.4.2",
     "standard": "^9.0.1",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "webpack": "^2.3.3"
   }
 }

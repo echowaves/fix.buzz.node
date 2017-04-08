@@ -1,26 +1,17 @@
 module.exports = {
-  entry: [
-    './src/react/index.js'
-  ],
+  devtool: 'source-map',
+  entry:  __dirname + "/app/index.js",
   output: {
-    path: __dirname,
-    publicPath: '/',
-    filename: 'bundle.js'
+    path: __dirname + "/build",
+    filename: "bundle.js"
   },
   module: {
-    loaders: [{
-      exclude: /node_modules/,
-      loader: 'babel',
-      query: {
-        presets: ['react', 'es2015', 'stage-1']
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       }
-    }]
+    ]
   },
-  resolve: {
-    extensions: ['.js', '.jsx']
-  },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './'
-  }
 }
