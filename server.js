@@ -10,11 +10,17 @@ import cors from 'koa-cors'
 import json from 'koa-json'
 import devLogger from 'koa-logger'
 import logger from './lib/logger'
+import html from './index.html.js'
+import serve from 'koa-static'
 
 import dotenv from 'dotenv'
 dotenv.config()
 
 const app = module.exports = new Koa()
+
+// serve static files e.g. bundle.js
+app.use(serve('./build'))
+
 
 // Global Error Handler
 app.use(async (ctx, next) => {
@@ -50,5 +56,13 @@ app.use(bodyParser())
 require('./config/routes')(app)
 
 const port = process.env.PORT || 3000
+
+
+// set the initial content
+app.use(async (ctx, next) => {
+  ctx.body = html('hello')
+})
+
+
 app.listen(port)
 logger.info(`servser started at ${port}`)
