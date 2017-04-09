@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize'
-import {sequelize} from '../../../config/consts'
+import {sequelize} from '../../config/consts'
 import logger from '../../../lib/logger'
 import bcrypt from 'bcrypt-as-promised'
 

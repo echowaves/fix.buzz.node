@@ -1,6 +1,6 @@
 const passport = require('koa-passport')
-import logger from '../lib/logger'
-import User from '../src/api/models/user'
+import logger from '../../lib/logger'
+import User from '../src/models/user'
 
 var JwtStrategy = require('passport-jwt').Strategy,
 ExtractJwt = require('passport-jwt').ExtractJwt;

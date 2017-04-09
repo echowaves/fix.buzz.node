@@ -1,6 +1,6 @@
 import Koa from 'koa'
 
-import middleware from 'koa-webpack'
+// import middleware from 'koa-webpack'
 import config from './webpack.config.js'
 
 import bodyParser from 'koa-bodyparser'
@@ -32,9 +32,9 @@ app.use(async (ctx, next) => {
   }
 })
 
-app.use(middleware({
-  config: config
-}))
+// app.use(middleware({
+//   config: config
+// }))
 
 // Compress response size and Gzip
 app.use(compress({
@@ -53,7 +53,7 @@ app.use(convert(devLogger()))
 
 app.use(bodyParser())
 
-require('./config/routes')(app)
+require('./api/config/routes')(app)
 
 const port = process.env.PORT || 3000
 

@@ -1,7 +1,7 @@
 import Router from 'koa-router'
 
-import indexController from '../src/react/index'
-import AuthenticationController from '../src/api/controllers/authentication'
+import indexController from '../src/controllers/index'
+import AuthenticationController from '../src/controllers/authentication'
 
 require('./passportStrategies')
 
@@ -16,7 +16,7 @@ module.exports = function (app) {
   app.use(passport.initialize())
 
   router
-    .get('/', indexController)
+    // .get('/', indexController)
     .post('/api/signin', requireSignin,     AuthenticationController.signin)
     .post('/api/signup',                    AuthenticationController.signup)
 
