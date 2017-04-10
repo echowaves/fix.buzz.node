@@ -16,7 +16,7 @@ module.exports = function (app) {
   app.use(passport.initialize())
 
   router
-    // .get('/', indexController)
+    .get('/api',                            indexController.helloWorld)
     .post('/api/signin', requireSignin,     AuthenticationController.signin)
     .post('/api/signup',                    AuthenticationController.signup)
 
