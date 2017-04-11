@@ -1,17 +1,25 @@
+var path = require('path');
+const webpack = require('webpack');
+
 module.exports = {
   devtool: 'source-map',
+  watch: true,
+
+
   entry:  __dirname + "/app/src/index.js",
   output: {
-    path: __dirname + "/build",
-    filename: "bundle.js",
-    publicPath: __dirname + "/build",
+    path: path.resolve(__dirname, 'build/'),
+    publicPath: '/',
+    filename: 'bundle.js'
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel-loader'
+        use: [
+          'babel-loader'
+        ]
       }
     ]
   },
@@ -21,5 +29,9 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     contentBase: './'
-  }
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ]
 }

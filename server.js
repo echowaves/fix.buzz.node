@@ -1,7 +1,12 @@
 import Koa from 'koa'
 
+const path = require('path')
+
+import Webpack from 'webpack'
 import middleware from 'koa-webpack'
-// import config from './webpack.config.js'
+const config = require('./webpack.config.js')
+const compiler = Webpack(config)
+
 
 import bodyParser from 'koa-bodyparser'
 import compress from 'koa-compress'
@@ -19,8 +24,24 @@ dotenv.config()
 const app = module.exports = new Koa()
 
 // serve static files e.g. bundle.js
-app.use(serve('./build'))
+app.use(serve(path.join(__dirname, 'public')))
 
+app.use(middleware({
+  compiler,
+  dev: {
+    stats: {
+      colors: true
+    },
+    watchOptions: {
+      aggregateTimeout: 300,
+      poll: true
+    }
+  },
+  hot: {
+    reload: true
+  }
+
+}))
 
 // Global Error Handler
 app.use(async (ctx, next) => {
@@ -32,15 +53,13 @@ app.use(async (ctx, next) => {
   }
 })
 
-app.use(middleware({
-  // config
-}))
+
 
 // Compress response size and Gzip
-app.use(compress({
-  threshold: 2048,
-  flush: require('zlib').Z_SYNC_FLUSH
-}))
+// app.use(compress({
+//   threshold: 2048,
+//   flush: require('zlib').Z_SYNC_FLUSH
+// }))
 
 // Set CORS *convert can make legacy middleware useable in Koa2
 app.use(convert(cors()))
