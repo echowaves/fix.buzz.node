@@ -1,14 +1,17 @@
-var path = require('path');
-const webpack = require('webpack');
+const webpack = require('webpack')
+const path = require('path')
 
 module.exports = {
-  devtool: 'source-map',
-  watch: true,
+  devtool: 'eval',
+  context: __dirname,
 
-
-  entry:  __dirname + "/app/src/index.js",
+  entry: [
+    'react-hot-loader/patch',
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+    './app/src/index.js'
+  ],
   output: {
-    path: path.resolve(__dirname, 'build/'),
+    path: __dirname,
     publicPath: '/',
     filename: 'bundle.js'
   },
@@ -16,9 +19,11 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        use: [
-          'babel-loader'
+        loaders: ['babel-loader'],
+        exclude: path.resolve(__dirname, 'node_modules'),
+        include: [
+          path.resolve(__dirname, 'app'),
+          path.resolve(__dirname, 'api')
         ]
       }
     ]

@@ -24,34 +24,30 @@ dotenv.config()
 const app = module.exports = new Koa()
 
 // serve static files e.g. bundle.js
-app.use(serve(path.join(__dirname, 'public')))
+// app.use(serve(path.join(__dirname, 'public')))
 
 app.use(middleware({
   compiler,
   dev: {
     stats: {
       colors: true
-    },
-    watchOptions: {
-      aggregateTimeout: 300,
-      poll: true
     }
   },
-  hot: {
-    reload: true
+  watchOptions: {
+    poll: true,
+    publicPath: config.output.publicPath,
   }
-
 }))
 
-// Global Error Handler
-app.use(async (ctx, next) => {
-  try {
-    await next()
-  } catch (e) {
-    ctx.body = e
-    ctx.status = e.status || 500
-  }
-})
+// // Global Error Handler
+// app.use(async (ctx, next) => {
+//   try {
+//     await next()
+//   } catch (e) {
+//     ctx.body = e
+//     ctx.status = e.status || 500
+//   }
+// })
 
 
 
@@ -61,16 +57,17 @@ app.use(async (ctx, next) => {
 //   flush: require('zlib').Z_SYNC_FLUSH
 // }))
 
-// Set CORS *convert can make legacy middleware useable in Koa2
-app.use(convert(cors()))
 
-// Perrty-printed response json
-app.use(convert(json()))
+// // Set CORS *convert can make legacy middleware useable in Koa2
+// app.use(convert(cors()))
 
-// Development style logger
-app.use(convert(devLogger()))
+// // Perrty-printed response json
+// app.use(convert(json()))
 
-app.use(bodyParser())
+// // Development style logger
+// app.use(convert(devLogger()))
+
+// app.use(bodyParser())
 
 require('./api/config/routes')(app)
 

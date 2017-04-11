@@ -35,3 +35,5 @@ const render = () => ReactDOM.render(
 
 render()
 store.subscribe(render)
+
+module.hot.accept();
