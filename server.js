@@ -39,15 +39,15 @@ app.use(middleware({
   }
 }))
 
-// // Global Error Handler
-// app.use(async (ctx, next) => {
-//   try {
-//     await next()
-//   } catch (e) {
-//     ctx.body = e
-//     ctx.status = e.status || 500
-//   }
-// })
+// Global Error Handler
+app.use(async (ctx, next) => {
+  try {
+    await next()
+  } catch (e) {
+    ctx.body = e
+    ctx.status = e.status || 500
+  }
+})
 
 
 
@@ -58,16 +58,16 @@ app.use(middleware({
 // }))
 
 
-// // Set CORS *convert can make legacy middleware useable in Koa2
-// app.use(convert(cors()))
+// Set CORS *convert can make legacy middleware useable in Koa2
+app.use(convert(cors()))
 
-// // Perrty-printed response json
-// app.use(convert(json()))
+// Perrty-printed response json
+app.use(convert(json()))
 
-// // Development style logger
-// app.use(convert(devLogger()))
+// Development style logger
+app.use(convert(devLogger()))
 
-// app.use(bodyParser())
+app.use(bodyParser())
 
 require('./api/config/routes')(app)
 
