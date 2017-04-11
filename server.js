@@ -52,10 +52,10 @@ app.use(async (ctx, next) => {
 
 
 // Compress response size and Gzip
-// app.use(compress({
-//   threshold: 2048,
-//   flush: require('zlib').Z_SYNC_FLUSH
-// }))
+app.use(compress({
+  threshold: 2048,
+  flush: require('zlib').Z_SYNC_FLUSH
+}))
 
 
 // Set CORS *convert can make legacy middleware useable in Koa2
