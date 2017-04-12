@@ -4,9 +4,8 @@ const path = require('path')
 
 import Webpack from 'webpack'
 import middleware from 'koa-webpack'
-const config = require('./webpack.config.js')
+const config = require('./webpack.config.js')[0]
 const compiler = Webpack(config)
-
 
 import bodyParser from 'koa-bodyparser'
 import compress from 'koa-compress'
@@ -31,7 +30,8 @@ app.use(middleware({
   dev: {
     stats: {
       colors: true
-    }
+    },
+    hot: true
   },
   watchOptions: {
     poll: true,

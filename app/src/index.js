@@ -29,11 +29,13 @@ const render = () => ReactDOM.render(
     value={store.getState()}
     onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
     onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-  />,
+    />,
   rootEl
 )
 
 render()
 store.subscribe(render)
 
-module.hot.accept();
+if(module.hot) {
+  module.hot.accept();
+}

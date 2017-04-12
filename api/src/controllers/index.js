@@ -1,3 +1,3 @@
 exports.helloWorld = async ctx => {
-  ctx.body = ['babel-preset-stage-3', 'bottle3']
+  ctx.body = ['babel-preset-stage-3', 'bottle1']
 }

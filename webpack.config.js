@@ -1,14 +1,17 @@
 const webpack = require('webpack')
 const path = require('path')
+var nodeExternals = require('webpack-node-externals')
 
-module.exports = {
+module.exports = [{
+  target: 'web', // <=== can be omitted as default is 'web'
   devtool: 'eval',
   context: __dirname,
 
   entry: [
     'react-hot-loader/patch',
     'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
-    './app/src/index.js'
+    'webpack/hot/dev-server',
+    './app/src/index.js',
   ],
   output: {
     path: __dirname,
@@ -20,23 +23,15 @@ module.exports = {
       {
         test: /\.js$/,
         loaders: ['babel-loader'],
-        exclude: path.resolve(__dirname, 'node_modules'),
-        include: [
-          path.resolve(__dirname, 'app'),
-          path.resolve(__dirname, 'api')
-        ]
+        include: path.resolve(__dirname, 'app')
       }
     ]
   },
   resolve: {
-    extensions: [ '.js', '.jsx']
-  },
-  devServer: {
-    historyApiFallback: true,
-    contentBase: './'
+    extensions: ['.js', '.jsx']
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ]
-}
+}]

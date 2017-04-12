@@ -7,7 +7,7 @@
     "parser": "babel-eslint"
   },
   "scripts": {
-    "start": "babel-node server.js",
+    "start": "babel-node server.js --watch",
     "build": "webpack",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register ./test/*.js",
     "migrate": "./node_modules/.bin/pg-migrate $@ --database-url-var DATABASE_URL",
@@ -68,6 +68,7 @@
     "redux-thunk": "^2.2.0",
     "sequelize": "^3.30.3",
     "webpack": "^2.3.3",
+    "webpack-node-externals": "^1.5.4",
     "winston": "^2.3.1"
   },
   "devDependencies": {
