@@ -4,3 +4,5 @@ npm-debug.log
 
 # Build Path
 build
+
+bundle.js
