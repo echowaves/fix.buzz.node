@@ -7,7 +7,7 @@
     "parser": "babel-eslint"
   },
   "scripts": {
-    "start": "babel-node server.js --watch",
+    "start": "nodemon --ignore app --exec babel-node server.js --watch",
     "build": "webpack",
     "test": "./node_modules/.bin/mocha --compilers js:babel-core/register ./test/*.js",
     "migrate": "./node_modules/.bin/pg-migrate $@ --database-url-var DATABASE_URL",
@@ -53,6 +53,7 @@
     "koa-webpack": "^0.3.1",
     "lodash": "^4.17.4",
     "node-pg-migrate": "^1.2.1",
+    "nodemon": "^1.11.0",
     "passport-jwt": "^2.2.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
