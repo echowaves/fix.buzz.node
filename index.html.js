@@ -8,7 +8,7 @@ export default (title =>
       <title>${title}</title>
     </head>
     <body>
-      <div id="root"></div>
+      <div id="container"></div>
       <script type="text/javascript" src="bundle.js"></script>
     </body>
   </html>
