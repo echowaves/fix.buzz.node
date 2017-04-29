@@ -4073,7 +4073,7 @@ redbox-react@^1.2.2, redbox-react@^1.2.5:
     object-assign "^4.0.1"
     prop-types "^15.5.4"
 
-redux-form@^6.6.0:
+redux-form@^6.6.3:
   version "6.6.3"
   resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-6.6.3.tgz#62362654f2214c83a8f9fcb8313702bb46f92205"
   dependencies:
