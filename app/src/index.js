@@ -18,7 +18,7 @@ ReactDOM.render(
       </Route>
     </BrowserRouter>
   </Provider>
-  , document.querySelector('#container')
+  , document.querySelector('.container')
 )
 
 // implement react js client here
