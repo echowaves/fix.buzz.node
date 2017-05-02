@@ -7,6 +7,7 @@ var tokenForUser = user => {
   return jwt.encode({sub: user.email, iat: timestamp}, process.env.FBUZZ_JWT_SECRET)
 }
 exports.signin = async ctx => {
+  logger.debug("inside signin")
   // User has already had their email and password auth'd
   // We just need to give them a token
   ctx.body = {token: tokenForUser(ctx.req.user)}

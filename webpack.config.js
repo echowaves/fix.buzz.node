@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
 var nodeExternals = require('webpack-node-externals')
+const Dotenv = require('dotenv-webpack');
 
 module.exports = [{
   target: 'web', // <=== can be omitted as default is 'web'
@@ -32,6 +33,7 @@ module.exports = [{
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoEmitOnErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin(),
+    new Dotenv()
   ]
 }]
