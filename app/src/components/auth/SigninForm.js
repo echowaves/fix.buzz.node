@@ -1,17 +1,22 @@
 import React, {Component} from 'react'
 import {Field, reduxForm} from 'redux-form'
-import * as actions from '../../actions'
+import { connect } from 'react-redux'
+import {signinUser} from '../../actions/index'
 
 class SigninForm extends Component {
 
-  handleFormSubmit = (values) => {
-    actions.signinUser(values)
+  onSubmit(props){
+    this.props.signinUser(props)
+    //  .then(() => {
+    //    this.context.router.push('/');
+    //  })
   }
 
   render() {
     const { handleSubmit } = this.props
+
     return (
-      <form onSubmit={handleSubmit(this.handleFormSubmit)}>
+      <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
         <fieldset className="form-group">
           <label>Email:</label>
           <Field name="email" component="input" type="email" className="form-control" />
@@ -26,11 +31,9 @@ class SigninForm extends Component {
   }
 
 }
+const formData = {
+  form: 'SigninForm',
+  fields: ['email', 'password']
+}
 
-
-SigninForm = reduxForm({
-  form: 'SigninForm'
-})(SigninForm)
-
-
-export default SigninForm
+export default connect(null, { signinUser })(reduxForm(formData)(SigninForm))
