@@ -6,7 +6,7 @@ import {
   FETCH_MESSAGE
 } from './types'
 
-export function signinUser({email, password}) {
+export const signinUser = ({email, password}) => {
   console.log(process.env.API_URL)
 
   return (dispatch) => {
