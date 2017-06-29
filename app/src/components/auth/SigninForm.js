@@ -6,7 +6,8 @@ import {signinUser} from '../../actions/index'
 class SigninForm extends Component {
 
   onSubmit(props){
-    this.props.signinUser(props)
+    console.log("this.context.router: ", this.context.router)
+    this.props.signinUser(props, this)
     //  .then(() => {
     //    this.context.router.push('/');
     //  })

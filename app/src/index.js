@@ -19,6 +19,7 @@ ReactDOM.render(
       <div>
         <Route path="/" component={App}/>
         <Route path="/signin" component={SigninForm} />
+        <Route path="/feature"  />
       </div>
     </BrowserRouter>
   </Provider>
